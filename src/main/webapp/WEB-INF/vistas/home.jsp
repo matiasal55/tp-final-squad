@@ -2,5 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:layout>
-    <a class="btn btn-primary" href="./calendarios" type="button">Ver Calendarios</a>
+    <div class="text-center">
+        <a class="btn btn-primary" href="./calendarios" type="button">Ver Calendarios</a>
+    </div>
 </t:layout>
