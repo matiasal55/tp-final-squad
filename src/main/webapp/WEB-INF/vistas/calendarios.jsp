@@ -10,6 +10,7 @@
     </jsp:attribute>
     <jsp:attribute name="scripts">
             <script>
+                console.log("${turno.start.toString()}")
                 var traerEventos=function() {
                     return [
                         {
@@ -35,6 +36,10 @@
                             title: 'Conference',
                             start: '2021-11-11',
                             end: '2021-11-13'
+                        },
+                        {
+                            title: "${turno.title}",
+                            start: "${turno.start}"
                         }
                     ]
                 }
