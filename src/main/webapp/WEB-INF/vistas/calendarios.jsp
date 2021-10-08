@@ -9,6 +9,36 @@
         <link rel="stylesheet" href="css/calendar.css">
     </jsp:attribute>
     <jsp:attribute name="scripts">
+            <script>
+                var traerEventos=function() {
+                    return [
+                        {
+                            title: 'All Day Event',
+                            start: '2021-11-01'
+                        },
+                        {
+                            title: 'Long Event',
+                            start: '2021-11-07',
+                            end: '2021-11-10'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2021-11-09T16:00:00'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2021-11-16T16:00:00'
+                        },
+                        {
+                            title: 'Conference',
+                            start: '2021-11-11',
+                            end: '2021-11-13'
+                        }
+                    ]
+                }
+            </script>
             <script src='js/main.js' type="text/javascript"></script>
             <script src='js/locales.js' type="text/javascript"></script>
             <script src="js/calendar.js" type="text/javascript"></script>
