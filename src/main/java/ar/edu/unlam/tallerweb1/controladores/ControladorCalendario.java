@@ -64,6 +64,6 @@ public class ControladorCalendario {
     public ModelAndView solicitarTurno(Turno turno) {
         ModelMap model=new ModelMap();
         model.put("turno", turno);
-        return new ModelAndView("calendarios", model);
+        return new ModelAndView("confirmacion", model);
     }
 }
