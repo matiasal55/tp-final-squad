@@ -34,6 +34,7 @@ public class ServicioCalendarioImpl implements ServicioCalendario{
 
     @Override
     public List<Turno> obtenerLosTurnosDeUnaEspecialidad(String especialidad) {
-        return null;
+        List<Turno> listaDeTurnos=repositorioCalendario.todosLosTurnosDeUnaEspecialidad(especialidad);
+        return listaDeTurnos;
     }
 }
