@@ -95,7 +95,7 @@ public class ControladorCalendarioTest {
     }
 
     private ModelAndView whenRecibeUnaProfesion(String profesion) throws Exception {
-        return controladorCalendario.recibirUnaProfesion(profesion);
+        return controladorCalendario.recibirUnaEspecialidad(profesion);
     }
 
     private void thenSeMuestraElCalendarioEspecifico(ModelAndView mav) {

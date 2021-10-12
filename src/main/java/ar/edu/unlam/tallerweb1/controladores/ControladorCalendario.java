@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 @Controller
 public class ControladorCalendario {
@@ -44,15 +44,17 @@ public class ControladorCalendario {
     }
 
     @RequestMapping(path = "/calendarios", method = RequestMethod.POST)
-    public ModelAndView recibirUnaProfesion(@RequestParam(required = false) String profesion) throws Exception {
+    public ModelAndView recibirUnaEspecialidad(@RequestParam(required = false) String especialidad) throws Exception {
         try {
             ModelMap model=new ModelMap();
-            String titulo = profesion;
-            Calendario unSoloCalendario=servicioCalendario.obtenerUnCalendarioEspecifico(profesion);
+            String titulo = especialidad;
+            Calendario unSoloCalendario=servicioCalendario.obtenerUnCalendarioEspecifico(especialidad);
             ArrayList<Calendario> calendarios=servicioCalendario.obtenerCalendarios();
+            List<Turno> turnos=servicioCalendario.obtenerLosTurnosDeUnaEspecialidad(especialidad);
             model.put("calendario", unSoloCalendario);
             model.put("calendarios",calendarios);
             model.put("titulo", titulo);
+            model.put("turnos", turnos);
             return new ModelAndView("calendarios", model);
         } catch (Exception e) {
             return new ModelAndView("error");
