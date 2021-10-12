@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -11,48 +12,47 @@ public class Turno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String especialidad;
+    private Calendar fechaYHora;
+    private Long documento;
+    private String especialista;
 
-    private String title;
-    private Date start;
-    private Date end;
-
-    public Turno(String especialidad, Date inicio, Date fin) {
-        this.title=especialidad;
-        this.start=inicio;
-        this.end=fin;
+    public Turno(String especialidad, Calendar fechaYHora, Long documento, String especialista) {
+        this.especialidad = especialidad;
+        this.fechaYHora = fechaYHora;
+        this.documento = documento;
+        this.especialista = especialista;
     }
 
-    public Turno() {}
-
-    public Long getId() {
-        return id;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
-    public String getTitle() {
-        return title;
+    public Calendar getFechaYHora() {
+        return fechaYHora;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFechaYHora(Calendar fechaYHora) {
+        this.fechaYHora = fechaYHora;
     }
 
-    public Date getStart() {
-        return start;
+    public Long getDocumento() {
+        return documento;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setDocumento(Long documento) {
+        this.documento = documento;
     }
 
-    public Date getEnd() {
-        return end;
+    public String getEspecialista() {
+        return especialista;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEspecialista(String especialista) {
+        this.especialista = especialista;
     }
 }

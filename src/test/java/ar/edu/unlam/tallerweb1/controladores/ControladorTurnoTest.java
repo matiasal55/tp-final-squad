@@ -1,16 +1,19 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Turno;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCalendario;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class ControladorTurnoTest {
     private ModelAndView mav;
     private Turno turno;
-    private ControladorTurno controladorTurno=new ControladorTurno();
+    private ServicioCalendario servicioCalendario=mock(ServicioCalendario.class);
+    private ControladorCalendario controladorCalendario=new ControladorCalendario(servicioCalendario);
 
     @Test
     public void reciboUnTurnoYSeEnviaALaVista(){
@@ -20,12 +23,12 @@ public class ControladorTurnoTest {
     }
 
     private void givenSolicitoUnTurno() {
-        Date momento=new Date();
-        turno=new Turno("Cardiologia", momento, momento);
+        Calendar momento=Calendar.getInstance();
+        turno=new Turno("Cardiologia", momento, 32141325L, "Jorge");
     }
 
     private ModelAndView whenSolicitoElTurno(Turno turno) {
-        return controladorTurno.solicitarTurno(turno);
+        return controladorCalendario.solicitarTurno(turno);
     }
 
     private void thenLoDebeRecibirLaVista(ModelAndView mav) {

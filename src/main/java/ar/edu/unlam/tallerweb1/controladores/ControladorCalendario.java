@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Calendario;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCalendario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Controller
 public class ControladorCalendario {
@@ -55,5 +57,11 @@ public class ControladorCalendario {
         } catch (Exception e) {
             return new ModelAndView("error");
         }
+    }
+
+    public ModelAndView solicitarTurno(Turno turno) {
+        ModelMap model=new ModelMap();
+        model.put("turno", turno);
+        return new ModelAndView("calendarios", model);
     }
 }
