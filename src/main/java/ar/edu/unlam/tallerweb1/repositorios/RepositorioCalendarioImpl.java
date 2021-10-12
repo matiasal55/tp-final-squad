@@ -32,7 +32,7 @@ public class RepositorioCalendarioImpl implements RepositorioCalendario{
 
     @Override
     public List<Turno> todosLosTurnosDeUnaEspecialidad(String especialidad) {
-        return null;
+        return getCurrentSession().createCriteria(Turno.class).add(Restrictions.eq("especialidad",especialidad)).list();
     }
 
     private Session getCurrentSession() {

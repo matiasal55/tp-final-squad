@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ControladorTurnoTest {
@@ -29,6 +30,7 @@ public class ControladorTurnoTest {
 
     private void givenSolicitoUnTurno() {
         Calendar fecha=Calendar.getInstance();
+        fecha.set(2022,10,01,14,00);
         turno=new Turno("Cardiologia", fecha, 32141325L, "Jorge");
     }
 
@@ -49,9 +51,11 @@ public class ControladorTurnoTest {
 
     private void givenTengoUnaListaDeTurnosDeUnaEspecialidad() {
         Calendar fecha1=Calendar.getInstance();
+        fecha1.set(2022,10,01,14,00);
         Turno turno1=new Turno("Cardiologia", fecha1, 32141325L, "Jorge");
 
         Calendar fecha2=Calendar.getInstance();
+        fecha2.set(2022,10,01,14,00);
         Turno turno2=new Turno("Cardiologia", fecha2, 32141925L, "Jorge");
 
         Calendar fecha3=Calendar.getInstance();

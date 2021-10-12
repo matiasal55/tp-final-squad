@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -17,7 +18,7 @@ public class ServicioTurnoTest {
     private ServicioCalendario servicioCalendario=new ServicioCalendarioImpl(repositorioCalendario);
 
     @Test
-    public void obtenerUnaListaDeTurnosDeUnaEspecialidadEspecifica(){
+    public void obtenerUnaListaDeTurnosDeUnaEspecialidad(){
         givenSolicitoLosTurnosDeUnaEspecialidad();
         List<Turno> listaDeTurnos=whenPidoLosTurnosDeEsaEspecialidad();
         thenDeberiaVerLaListaDeTurnosPedida(listaDeTurnos);
@@ -27,9 +28,11 @@ public class ServicioTurnoTest {
         List<Turno> listaDeTurnos=new ArrayList<>();
 
         Calendar fecha1=Calendar.getInstance();
+        fecha1.set(2022,10,01,14,00);
         Turno turno1=new Turno("Cardiologia", fecha1, 32141325L, "Jorge");
 
         Calendar fecha2=Calendar.getInstance();
+        fecha2.set(2022,10,01,14,00);
         Turno turno2=new Turno("Cardiologia", fecha2, 32141925L, "Jorge");
 
         listaDeTurnos.add(turno1);
