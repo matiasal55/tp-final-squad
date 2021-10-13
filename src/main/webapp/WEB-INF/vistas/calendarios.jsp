@@ -11,17 +11,12 @@
     <jsp:attribute name="scripts">
             <script>
                 const listaDeTurnos=[];
-                let nuevaFecha;
                 <c:forEach items="${turnos}" var="turno">
-                    nuevaFecha="${turno.fechaYHora.getTime()}"
-                    console.log(nuevaFecha)
                     listaDeTurnos.push({
                         title: "Ocupado",
-                        start: "${turno.fechaYHora.getTime().toLocaleString()}",
-                        end: "${turno.fechaYHora.getTime().toString()}",
+                        start: "${turno.fecha.toString().split(" ")[0]}T${turno.hora}:00"
                     })
                 </c:forEach>
-                console.log(listaDeTurnos);
                 var traerEventos=function() {
                     return listaDeTurnos;
                 }
