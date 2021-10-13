@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Turno {
@@ -9,19 +11,21 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String especialidad;
-    private Calendar fechaYHora;
     private Long documento;
     private String especialista;
-
-    public Turno(String especialidad, Calendar fechaYHora, Long documento, String especialista) {
-        this.especialidad = especialidad;
-        this.fechaYHora = fechaYHora;
-        this.documento = documento;
-        this.especialista = especialista;
-    }
+    private Date fecha;
+    private String hora;
 
     public Turno() {
 
+    }
+
+    public Turno(String especialidad, Long documento, String especialista, Date fecha, String hora) {
+        this.especialidad = especialidad;
+        this.documento = documento;
+        this.especialista = especialista;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public Long getId() {
@@ -40,14 +44,6 @@ public class Turno {
         this.especialidad = especialidad;
     }
 
-    public Calendar getFechaYHora() {
-        return fechaYHora;
-    }
-
-    public void setFechaYHora(Calendar fechaYHora) {
-        this.fechaYHora = fechaYHora;
-    }
-
     public Long getDocumento() {
         return documento;
     }
@@ -62,5 +58,21 @@ public class Turno {
 
     public void setEspecialista(String especialista) {
         this.especialista = especialista;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 }

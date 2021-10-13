@@ -10,38 +10,20 @@
     </jsp:attribute>
     <jsp:attribute name="scripts">
             <script>
-                console.log("${turno.start.toString()}")
+                const listaDeTurnos=[];
+                let nuevaFecha;
+                <c:forEach items="${turnos}" var="turno">
+                    nuevaFecha="${turno.fechaYHora.getTime()}"
+                    console.log(nuevaFecha)
+                    listaDeTurnos.push({
+                        title: "Ocupado",
+                        start: "${turno.fechaYHora.getTime().toLocaleString()}",
+                        end: "${turno.fechaYHora.getTime().toString()}",
+                    })
+                </c:forEach>
+                console.log(listaDeTurnos);
                 var traerEventos=function() {
-                    return [
-                        {
-                            title: 'All Day Event',
-                            start: '2021-11-01'
-                        },
-                        {
-                            title: 'Long Event',
-                            start: '2021-11-07',
-                            end: '2021-11-10'
-                        },
-                        {
-                            groupId: 999,
-                            title: 'Repeating Event',
-                            start: '2021-11-09T16:00:00'
-                        },
-                        {
-                            groupId: 999,
-                            title: 'Repeating Event',
-                            start: '2021-11-16T16:00:00'
-                        },
-                        {
-                            title: 'Conference',
-                            start: '2021-11-11',
-                            end: '2021-11-13'
-                        },
-                        {
-                            title: "${turno.title}",
-                            start: "${turno.start}"
-                        }
-                    ]
+                    return listaDeTurnos;
                 }
             </script>
             <script src='js/main.js' type="text/javascript"></script>
@@ -52,7 +34,7 @@
         <section>
             <h1>${titulo}</h1>
             <form method="POST" action="calendarios">
-                <select name="profesion" class="form-select">
+                <select name="especialidad" class="form-select">
                     <option selected disabled value="0">Elija una opción</option>
                     <c:forEach items="${calendarios}" var="calendar">
                         <option value="${calendar.profesion}">${calendar.profesion}</option>

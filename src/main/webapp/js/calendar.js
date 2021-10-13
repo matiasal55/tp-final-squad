@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         events: traerEventos()
     });
 
+    calendar.formatDate()
+
     calendar.render();
 
 });

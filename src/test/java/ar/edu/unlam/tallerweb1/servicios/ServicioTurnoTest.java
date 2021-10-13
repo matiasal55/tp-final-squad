@@ -27,13 +27,11 @@ public class ServicioTurnoTest {
     private void givenSolicitoLosTurnosDeUnaEspecialidad() {
         List<Turno> listaDeTurnos=new ArrayList<>();
 
-        Calendar fecha1=Calendar.getInstance();
-        fecha1.set(2022,10,01,14,00);
-        Turno turno1=new Turno("Cardiologia", fecha1, 32141325L, "Jorge");
+        Date fecha1=new Date();
+        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1, "14:00");
 
-        Calendar fecha2=Calendar.getInstance();
-        fecha2.set(2022,10,01,14,00);
-        Turno turno2=new Turno("Cardiologia", fecha2, 32141925L, "Jorge");
+        Date fecha2=new Date();
+        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2, "15:00");
 
         listaDeTurnos.add(turno1);
         listaDeTurnos.add(turno2);
