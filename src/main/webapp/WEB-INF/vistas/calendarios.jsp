@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:layout>
     <jsp:attribute name="styles">
@@ -14,7 +15,7 @@
                 <c:forEach items="${turnos}" var="turno">
                     listaDeTurnos.push({
                         title: "Ocupado",
-                        start: "${turno.fecha.toString().split(" ")[0]}T${turno.hora}:00"
+                        start: "${turno.fecha}T${turno.hora}:00"
                     })
                 </c:forEach>
                 var traerEventos=function() {
@@ -48,30 +49,41 @@
                         <h5 class="modal-title" id="exampleModalLabel">Nuevo turno</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form>
+                    <form:form action="solicitar-turno" method="post" modelAttribute="turno">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="recipient-dni" class="col-form-label">DNI de Paciente:</label>
-                                <input type="text" class="form-control" id="recipient-dni" required />
+                                <form:label path="documento" class="col-form-label">DNI de Paciente:</form:label>
+                                <form:input path="documento" type="text" class="form-control" value="32141254" readonly="true" />
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-especialidad" class="col-form-label">Especialidad:</label>
-                                <input type="text" class="form-control" id="recipient-especialidad" disabled value="${titulo}" />
+                                <form:label path="especialidad" class="col-form-label">Especialidad:</form:label>
+                                <form:input path="especialidad" type="text" class="form-control" readonly="true" value="${titulo}" />
                             </div>
                             <div class="mb-3">
-                                <label for="fecha-atencion" class="col-form-label">Fecha de atención:</label>
-                                <input type="date" id="fecha-atencion" class="form-control" disabled />
+                                <form:label path="fecha" class="col-form-label">Fecha de atención:</form:label>
+                                <form:input path="fecha" type="text" id="fecha-atencion" class="form-control" readonly="false" />
                             </div>
                             <div class="mb-3">
-                                <label for="hora-atencion" class="col-form-label">Hora de atención:</label>
-                                <input type="time" id="hora-atencion" class="form-control" />
+                                <form:label path="hora" class="col-form-label">Hora de atención:</form:label>
+                                <form:select path="hora" class="form-control">
+                                    <form:option value="0" selected="true" disabled="true">Elija un horario</form:option>
+                                    <form:option value="14:00">14:00</form:option>
+                                    <form:option value="15:00">15:00</form:option>
+                                    <form:option value="16:00">16:00</form:option>
+                                    <form:option value="17:00">17:00</form:option>
+                                    <form:option value="18:00">18:00</form:option>
+                                </form:select>
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="especialista" class="col-form-label">Especialidad:</form:label>
+                                <form:input path="especialista" type="text" class="form-control" readonly="true" value="Dr. Jorge Sanchez" />
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success">Solicitar Turno</button>
+                            <button type="submit" class="btn btn-success">Solicitar Turno</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

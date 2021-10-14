@@ -4,14 +4,17 @@ import ar.edu.unlam.tallerweb1.modelo.Calendario;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCalendario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,6 +43,7 @@ public class ControladorCalendario {
         ArrayList<Calendario> calendarios=servicioCalendario.obtenerCalendarios();
         model.put("calendarios",calendarios);
         model.put("titulo", titulo);
+        model.put("turno", new Turno());
         return new ModelAndView("calendarios", model);
     }
 
@@ -55,14 +59,15 @@ public class ControladorCalendario {
             model.put("calendarios",calendarios);
             model.put("titulo", titulo);
             model.put("turnos", turnos);
+            model.put("turno", new Turno());
             return new ModelAndView("calendarios", model);
         } catch (Exception e) {
-            model.put("msg", e.getMessage());
             return new ModelAndView("error", model);
         }
     }
 
-    public ModelAndView solicitarTurno(Turno turno) {
+    @RequestMapping(path = "/solicitar-turno", method = RequestMethod.POST)
+    public ModelAndView solicitarTurno(@ModelAttribute("turno") Turno turno) {
         ModelMap model=new ModelMap();
         model.put("turno", turno);
         return new ModelAndView("confirmacion", model);
