@@ -29,10 +29,10 @@ public class RepositorioTurnoTest extends SpringTest {
 
     private void givenTengoUnaListaDeTurnosDeUnaEspecialidad() {
         Date fecha1=new Date();
-        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1, "14:00");
+        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1.toString(), "14:00");
 
         Date fecha2=new Date();
-        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2, "15:00");
+        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2.toString(), "15:00");
 
         session().save(turno1);
         session().save(turno2);

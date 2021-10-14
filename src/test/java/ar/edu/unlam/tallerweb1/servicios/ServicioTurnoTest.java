@@ -28,10 +28,10 @@ public class ServicioTurnoTest {
         List<Turno> listaDeTurnos=new ArrayList<>();
 
         Date fecha1=new Date();
-        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1, "14:00");
+        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1.toString(), "14:00");
 
         Date fecha2=new Date();
-        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2, "15:00");
+        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2.toString(), "15:00");
 
         listaDeTurnos.add(turno1);
         listaDeTurnos.add(turno2);

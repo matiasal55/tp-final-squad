@@ -1,8 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -13,14 +13,14 @@ public class Turno {
     private String especialidad;
     private Long documento;
     private String especialista;
-    private Date fecha;
+    private String fecha;
     private String hora;
 
     public Turno() {
 
     }
 
-    public Turno(String especialidad, Long documento, String especialista, Date fecha, String hora) {
+    public Turno(String especialidad, Long documento, String especialista, String fecha, String hora) {
         this.especialidad = especialidad;
         this.documento = documento;
         this.especialista = especialista;
@@ -60,11 +60,11 @@ public class Turno {
         this.especialista = especialista;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

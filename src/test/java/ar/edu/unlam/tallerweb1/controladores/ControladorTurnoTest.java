@@ -29,7 +29,7 @@ public class ControladorTurnoTest {
     }
 
     private void givenSolicitoUnTurno() {
-        Date fecha=new Date();
+        String fecha="2021-10-01";
         turno=new Turno("Cardiologia", 32141325L, "Jorge", fecha, "14:00");
     }
 
@@ -50,13 +50,13 @@ public class ControladorTurnoTest {
 
     private void givenTengoUnaListaDeTurnosDeUnaEspecialidad() {
         Date fecha1=new Date();
-        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1, "14:00");
+        Turno turno1=new Turno("Cardiologia", 32141325L, "Jorge", fecha1.toString(), "14:00");
 
         Date fecha2=new Date();
-        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2, "15:00");
+        Turno turno2=new Turno("Cardiologia", 32141925L, "Jorge", fecha2.toString(), "15:00");
 
         Date fecha3=new Date();
-        turno=new Turno("Cardiologia", 32141371L, "Jorge", fecha3, "16:00");
+        turno=new Turno("Cardiologia", 32141371L, "Jorge", fecha3.toString(), "16:00");
 
         listaDeTurnos.add(turno1);
         listaDeTurnos.add(turno2);
