@@ -1,58 +1,90 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Matias
-  Date: 27/9/2021
-  Time: 14:38
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Proyecto Taller Web</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"/>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid"><a class="navbar-brand" href="home">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-                <li class="nav-item"><a class="nav-link disabled">Disabled</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container mt-5">
-    <section>
-        <h1>${titulo}</h1>
-        <form method="POST" action="calendarios">
-            <select name="profesion" class="form-select">
-                <option selected disabled value="0">Elija una opción</option>
-                <c:forEach items="${calendarios}" var="calendar">
-                    <option value="${calendar.profesion}">${calendar.profesion}</option>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
+<t:layout>
+    <jsp:attribute name="styles">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/calendar.css">
+    </jsp:attribute>
+    <jsp:attribute name="scripts">
+            <script>
+                const listaDeTurnos=[];
+                <c:forEach items="${turnos}" var="turno">
+                    listaDeTurnos.push({
+                        title: "Ocupado",
+                        start: "${turno.fecha}T${turno.hora}:00"
+                    })
                 </c:forEach>
-            </select>
-            <button type="submit" class="btn btn-primary mt-3">Aplicar filtro</button>
-        </form>
-<%--        <form method="POST" action="calendarios">--%>
-<%--        <form:select path="profesion" cssClass="form-select">--%>
-<%--            <form:option selected="true" value="0" label="Elija una opción"  disabled="true" />--%>
-<%--            <form:options items="${profesiones}" />--%>
-<%--        </form:select>--%>
-<%--            <button type="submit" class="btn btn-primary mt-3">Aplicar filtro</button>--%>
-<%--        </form>--%>
-        <div class="text-center">
-            <img class="img-fluid" src="https://www.formget.com/wp-content/uploads/2015/07/imageedit_30_8479321211.gif" alt="Calendario"/>
+                var traerEventos=function() {
+                    return listaDeTurnos;
+                }
+            </script>
+            <script src='js/main.js' type="text/javascript"></script>
+            <script src='js/locales.js' type="text/javascript"></script>
+            <script src="js/calendar.js" type="text/javascript"></script>
+    </jsp:attribute>
+    <jsp:body>
+        <section>
+            <h1>${titulo}</h1>
+            <form method="POST" action="calendarios">
+                <select name="especialidad" class="form-select">
+                    <option selected disabled value="0">Elija una opción</option>
+                    <c:forEach items="${calendarios}" var="calendar">
+                        <option value="${calendar.profesion}">${calendar.profesion}</option>
+                    </c:forEach>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Aplicar filtro</button>
+            </form>
+        </section>
+        <section>
+            <div id='calendar'></div>
+        </section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo turno</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form:form action="solicitar-turno" method="post" modelAttribute="turno">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <form:label path="documento" class="col-form-label">DNI de Paciente:</form:label>
+                                <form:input path="documento" type="text" class="form-control" value="32141254" readonly="true" />
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="especialidad" class="col-form-label">Especialidad:</form:label>
+                                <form:input path="especialidad" type="text" class="form-control" readonly="true" value="${titulo}" />
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="fecha" class="col-form-label">Fecha de atención:</form:label>
+                                <form:input path="fecha" type="text" id="fecha-atencion" class="form-control" readonly="false" />
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="hora" class="col-form-label">Hora de atención:</form:label>
+                                <form:select path="hora" class="form-control">
+                                    <form:option value="0" selected="true" disabled="true">Elija un horario</form:option>
+                                    <form:option value="14:00">14:00</form:option>
+                                    <form:option value="15:00">15:00</form:option>
+                                    <form:option value="16:00">16:00</form:option>
+                                    <form:option value="17:00">17:00</form:option>
+                                    <form:option value="18:00">18:00</form:option>
+                                </form:select>
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="especialista" class="col-form-label">Especialidad:</form:label>
+                                <form:input path="especialista" type="text" class="form-control" readonly="true" value="Dr. Jorge Sanchez" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Solicitar Turno</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form:form>
+                </div>
+            </div>
         </div>
-    </section>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
-</html>
+    </jsp:body>
+</t:layout>

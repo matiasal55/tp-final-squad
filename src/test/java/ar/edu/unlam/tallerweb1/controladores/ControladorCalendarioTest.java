@@ -84,7 +84,7 @@ public class ControladorCalendarioTest {
     }
 
     private void thenVeoTodosLosCalendarios(ModelAndView mav) {
-        assertThat(mav.getViewName()).isEqualTo("calendarios");
+        assertThat(mav.getViewName()).isEqualTo("listaDeEspecialidades");
         CALENDARIO.setProfesion(PROFESION);
         ArrayList<Calendario> profesiones= (ArrayList<Calendario>) mav.getModel().get("calendarios");
         assertThat(profesiones).contains(CALENDARIO);
@@ -95,7 +95,7 @@ public class ControladorCalendarioTest {
     }
 
     private ModelAndView whenRecibeUnaProfesion(String profesion) throws Exception {
-        return controladorCalendario.recibirUnaProfesion(profesion);
+        return controladorCalendario.recibirUnaEspecialidad(profesion);
     }
 
     private void thenSeMuestraElCalendarioEspecifico(ModelAndView mav) {
