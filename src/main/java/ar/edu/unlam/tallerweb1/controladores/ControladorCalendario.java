@@ -43,8 +43,7 @@ public class ControladorCalendario {
         ArrayList<Calendario> calendarios=servicioCalendario.obtenerCalendarios();
         model.put("calendarios",calendarios);
         model.put("titulo", titulo);
-        model.put("turno", new Turno());
-        return new ModelAndView("calendarios", model);
+        return new ModelAndView("listaDeEspecialidades", model);
     }
 
     @RequestMapping(path = "/calendarios", method = RequestMethod.POST)
@@ -69,7 +68,11 @@ public class ControladorCalendario {
     @RequestMapping(path = "/solicitar-turno", method = RequestMethod.POST)
     public ModelAndView solicitarTurno(@ModelAttribute("turno") Turno turno) {
         ModelMap model=new ModelMap();
-        model.put("turno", turno);
-        return new ModelAndView("confirmacion", model);
+        Long confirmacion=servicioCalendario.crearUnTurno(turno);
+        if(confirmacion!=null){
+            model.put("turno", turno);
+            return new ModelAndView("confirmacion", model);
+        }
+        return new ModelAndView("error");
     }
 }

@@ -12,4 +12,6 @@ public interface RepositorioCalendario {
     Calendario unCalendarioEspecifico(String profesion);
 
     List<Turno> todosLosTurnosDeUnaEspecialidad(String especialidad);
+
+    Long guardarTurno(Turno turno);
 }

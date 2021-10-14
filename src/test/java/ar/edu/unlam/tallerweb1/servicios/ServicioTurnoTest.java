@@ -5,7 +5,6 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioCalendario;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +44,27 @@ public class ServicioTurnoTest {
 
     private void thenDeberiaVerLaListaDeTurnosPedida(List<Turno> listaDeTurnos) {
         assertThat(listaDeTurnos).hasSize(2);
+    }
+
+    @Test
+    public void cuandoReciboUnTurnoMandarloAlRepositorioParaQueLoGuarde(){
+        Turno turno=givenReciboUnTurno();
+        Long resultado=whenQuieroGuardarElTurno(turno);
+        thenDeberiaRecibirUnaConfirmacion(resultado);
+    }
+
+    private Turno givenReciboUnTurno() {
+        Turno turno=new Turno(ESPECIALIDAD, 32141254L, "Jorge", "2021-11-01","14:00");
+        when(repositorioCalendario.guardarTurno(turno)).thenReturn(1L);
+        return turno;
+    }
+
+    private Long whenQuieroGuardarElTurno(Turno turno) {
+        return servicioCalendario.crearUnTurno(turno);
+    }
+
+    private void thenDeberiaRecibirUnaConfirmacion(Long resultado) {
+        assertThat(resultado).isNotNull();
     }
 
 }

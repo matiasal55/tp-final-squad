@@ -12,4 +12,6 @@ public interface ServicioCalendario {
     Calendario obtenerUnCalendarioEspecifico(String profesion) throws Exception;
 
     List<Turno> obtenerLosTurnosDeUnaEspecialidad(String especialidad);
+
+    Long crearUnTurno(Turno turno);
 }

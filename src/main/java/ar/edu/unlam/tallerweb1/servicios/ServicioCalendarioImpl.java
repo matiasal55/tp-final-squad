@@ -37,4 +37,10 @@ public class ServicioCalendarioImpl implements ServicioCalendario{
         List<Turno> listaDeTurnos=repositorioCalendario.todosLosTurnosDeUnaEspecialidad(especialidad);
         return listaDeTurnos;
     }
+
+    @Override
+    public Long crearUnTurno(Turno turno) {
+        Long guardado=repositorioCalendario.guardarTurno(turno);
+        return guardado;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +43,27 @@ public class RepositorioTurnoTest extends SpringTest {
 
     private void thenDeberiaTenerUnaListaDeTurnosDeEsaEspecialidad(List<Turno> listaDeTurnos) {
         assertThat(listaDeTurnos).hasSize(2);
+    }
+
+    @Test
+    @Transactional @Rollback
+    public void quieroGuardarUnTurno(){
+        Turno turno=givenTengoUnTurno();
+        Long confirmacion=whenLoQuieroGuardar(turno);
+        thenDeberiaTenerUnaConfirmacion(confirmacion);
+    }
+
+    private Turno givenTengoUnTurno() {
+        Turno turno=new Turno(ESPECIALIDAD, 32141254L, "Jorge", "2021-11-01","14:00");
+        return turno;
+    }
+
+    private Long whenLoQuieroGuardar(Turno turno) {
+        return repositorioCalendario.guardarTurno(turno);
+    }
+
+    private void thenDeberiaTenerUnaConfirmacion(Long confirmacion) {
+        assertThat(confirmacion).isNotNull();
     }
 
 }

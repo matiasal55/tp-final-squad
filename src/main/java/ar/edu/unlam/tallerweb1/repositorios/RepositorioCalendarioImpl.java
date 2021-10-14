@@ -35,6 +35,11 @@ public class RepositorioCalendarioImpl implements RepositorioCalendario{
         return getCurrentSession().createCriteria(Turno.class).add(Restrictions.eq("especialidad",especialidad)).list();
     }
 
+    @Override
+    public Long guardarTurno(Turno turno) {
+        return (Long) getCurrentSession().save(turno);
+    }
+
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }

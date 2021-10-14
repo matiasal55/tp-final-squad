@@ -31,6 +31,7 @@ public class ControladorTurnoTest {
     private void givenSolicitoUnTurno() {
         String fecha="2021-10-01";
         turno=new Turno("Cardiologia", 32141325L, "Jorge", fecha, "14:00");
+        when(servicioCalendario.crearUnTurno(turno)).thenReturn(1L);
     }
 
     private ModelAndView whenSolicitoElTurno(Turno turno) {
@@ -74,5 +75,20 @@ public class ControladorTurnoTest {
         List<Turno> turnos= (List<Turno>) mav.getModel().get("turnos");
         assertThat(turnos).contains(turno);
         assertThat(turnos).hasSize(3);
+    }
+
+    @Test
+    public void recibirUnTurnoYEnviarloAlServicioParaQueLoGuarde(){
+        givenSolicitoUnTurno();
+        mav=whenGuardoElTurno();
+        thenDeberiaVerQueSeGuardo(mav);
+    }
+
+    private ModelAndView whenGuardoElTurno() {
+        return controladorCalendario.solicitarTurno(turno);
+    }
+
+    private void thenDeberiaVerQueSeGuardo(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("confirmacion");
     }
 }
